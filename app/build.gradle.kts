@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.org.fusesource.jansi.AnsiRenderer.test
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -49,6 +51,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }
 
 dependencies {
@@ -62,6 +67,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material3:material3-android:1.2.0")
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -104,10 +110,10 @@ dependencies {
 
     // LiveData testing
     testImplementation ("androidx.arch.core:core-testing:2.1.0")
-    testImplementation ("io.mockk:mockk:1.12.0")
+    testImplementation ("io.mockk:mockk:1.13.2")
 
     testImplementation ("app.cash.turbine:turbine:0.6.0")
-
+    testImplementation ("junit:junit:4.13.2")
 
     implementation("androidx.room:room-runtime:2.5.1")
     implementation("androidx.room:room-ktx:2.5.1")

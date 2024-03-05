@@ -18,12 +18,11 @@ import java.util.Date
 
 class DetailViewModel @AssistedInject constructor(
     private val addUseCase: AddUseCase,
-    private val getNoteByIdUseCase: GetNoteByIdUseCase,
+    var getNoteByIdUseCase: GetNoteByIdUseCase,
     @Assisted private val noteId: Long,
 ) : ViewModel() {
 
     var state by mutableStateOf(DetailState())
-        private set
 
     val isFormNotBlank: Boolean
         get() = state.title.isNotEmpty() &&
@@ -41,7 +40,7 @@ class DetailViewModel @AssistedInject constructor(
         initialize()
     }
 
-    private fun initialize() {
+    fun initialize() {
         val isUpdatingNote = noteId != -1L
         state = state.copy(
             isUpdatingNote = isUpdatingNote
@@ -53,7 +52,7 @@ class DetailViewModel @AssistedInject constructor(
 
     }
 
-    private fun getNoteById() = viewModelScope.launch {
+    fun getNoteById() = viewModelScope.launch {
         getNoteByIdUseCase(noteId).collectLatest { note ->
             state = state.copy(
                 id = note.id,
