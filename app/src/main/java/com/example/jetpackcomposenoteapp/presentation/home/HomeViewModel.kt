@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
         getAllNotes()
     }
 
-    private fun getAllNotes() {
+    fun getAllNotes() {
         getAllNotesUseCase()
             .onEach {
                 _state.value = HomeState(notes = ScreenViewState.Success(it))
