@@ -8,13 +8,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposenoteapp.common.ScreenViewState
 import com.example.jetpackcomposenoteapp.data.local.model.Note
 import com.example.jetpackcomposenoteapp.presentation.home.NoteCard
 import com.example.jetpackcomposenoteapp.presentation.home.notes
-
+import com.example.jetpackcomposenoteapp.common.util.TestTag
 
 @Composable
 fun BookmarkScreen(
@@ -27,7 +29,7 @@ fun BookmarkScreen(
 ) {
     when (state.notes) {
         is ScreenViewState.Loading -> {
-            CircularProgressIndicator()
+            CircularProgressIndicator(modifier = Modifier.testTag(TestTag.LOADING_INDICATOR))
         }
 
         is ScreenViewState.Success -> {
